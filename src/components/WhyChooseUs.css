@@ -1,0 +1,29 @@
+.why {
+  padding: var(--section-padding);
+  background: var(--bg);
+}
+
+.why__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.why__list {
+  list-style: disc;
+  padding-inline-start: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.why__list li {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .why__list li {
+    font-size: 1.05rem;
+  }
+}
