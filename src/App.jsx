@@ -11,14 +11,28 @@ import Contact from './components/Contact'
 import './App.css'
 
 function AppContent() {
-  const { t } = useApp()
+  const { t, loading, usingFallback } = useApp()
 
   useEffect(() => {
     document.title = t.meta.title
   }, [t.meta.title])
 
+  if (loading) {
+    return (
+      <div className="app-loading" role="status" aria-live="polite">
+        <div className="app-loading__spinner" aria-hidden="true" />
+        <p>{t.common.loading}</p>
+      </div>
+    )
+  }
+
   return (
     <>
+      {usingFallback && (
+        <div className="app-banner" role="status">
+          {t.common.fallbackNotice}
+        </div>
+      )}
       <Navbar />
       <main>
         <Hero />

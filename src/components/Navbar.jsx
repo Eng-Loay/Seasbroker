@@ -1,5 +1,6 @@
 import { useApp } from '../context/AppContext'
 import ThemeToggle from './ThemeToggle'
+import SafeImage from './SafeImage'
 import './Navbar.css'
 
 const navLinks = [
@@ -16,7 +17,11 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navbar__inner">
         <a href="#home" className="navbar__logo">
-          <img src="/assets/logo.png" alt={t.meta.logoAlt} />
+          <SafeImage
+            src={t.meta.logoUrl}
+            fallback="/assets/logo.png"
+            alt={t.meta.logoAlt}
+          />
         </a>
 
         <nav className="navbar__nav" aria-label={t.nav.ariaLabel}>

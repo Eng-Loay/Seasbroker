@@ -1,5 +1,6 @@
 import { useApp } from '../context/AppContext'
 import Icon from './Icon'
+import SafeImage from './SafeImage'
 import './About.css'
 
 export default function About() {
@@ -13,7 +14,11 @@ export default function About() {
 
         <div className="about__grid">
           <div className="about__image-wrap">
-            <img src="/assets/about-ship.png" alt={t.about.imageAlt} />
+            <SafeImage
+              src={t.about.imageUrl}
+              fallback="/assets/about-ship.png"
+              alt={t.about.imageAlt}
+            />
           </div>
 
           <div className="about__text">

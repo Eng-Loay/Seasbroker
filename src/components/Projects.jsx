@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useApp } from '../context/AppContext'
+import SafeImage from './SafeImage'
 import './Projects.css'
-
-const PAGE_SIZE = 3
 
 export default function Projects() {
   const { t, lang } = useApp()
   const projects = t.projects.items
-  const totalPages = Math.ceil(projects.length / PAGE_SIZE)
+  const pageSize = t.projects.pageSize ?? t.meta?.projectsPageSize ?? 3
+  const totalPages = Math.ceil(projects.length / pageSize)
   const [page, setPage] = useState(0)
 
   useEffect(() => {
     setPage(0)
   }, [lang])
 
-  const visible = projects.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE)
+  const visible = projects.slice(page * pageSize, page * pageSize + pageSize)
 
   return (
     <section id="projects" className="projects">
@@ -23,9 +23,9 @@ export default function Projects() {
 
         <div className="projects__grid">
           {visible.map((project) => (
-            <article key={project.title} className="project-card">
+            <article key={project.id ?? project.title} className="project-card">
               <div className="project-card__image">
-                <img src={project.image} alt={project.title} />
+                <SafeImage src={project.image} fallback="/assets/project-1.png" alt={project.title} />
               </div>
               <div className="project-card__body">
                 <h3>{project.title}</h3>

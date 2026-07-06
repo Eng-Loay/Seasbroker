@@ -1,15 +1,23 @@
 import { useApp } from '../context/AppContext'
 import Icon from './Icon'
+import SafeImage from './SafeImage'
 import './Contact.css'
 
 export default function Contact() {
   const { t } = useApp()
+  const email = t.contact.emailAddress || 'info@seasbroker.com'
+  const phone = t.contact.phoneNumber || '+20123456789'
 
   return (
     <footer id="contact" className="contact">
       <div className="contact__panel">
         <div className="contact__content">
-          <img className="contact__logo" src="/assets/logo.png" alt={t.meta.logoAlt} />
+          <SafeImage
+            className="contact__logo"
+            src={t.contact.logoUrl || t.meta.logoUrl}
+            fallback="/assets/logo.png"
+            alt={t.meta.logoAlt}
+          />
 
           <div className="contact__grid">
             <div className="contact__item">
@@ -25,7 +33,7 @@ export default function Contact() {
               <div>
                 <h3>{t.contact.email}</h3>
                 <p>
-                  <a href="mailto:info@seasbroker.com">info@seasbroker.com</a>
+                  <a href={`mailto:${email}`}>{email}</a>
                 </p>
               </div>
             </div>
@@ -44,7 +52,7 @@ export default function Contact() {
               <div>
                 <h3>{t.contact.phone}</h3>
                 <p>
-                  <a href="tel:+20123456789">+20123456789</a>
+                  <a href={`tel:${phone}`}>{phone}</a>
                 </p>
               </div>
             </div>
@@ -52,7 +60,11 @@ export default function Contact() {
         </div>
 
         <div className="contact__image">
-          <img src="/assets/contact-ship.png" alt={t.contact.imageAlt} />
+          <SafeImage
+            src={t.contact.imageUrl}
+            fallback="/assets/contact-ship.png"
+            alt={t.contact.imageAlt}
+          />
         </div>
       </div>
     </footer>

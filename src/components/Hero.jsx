@@ -1,5 +1,6 @@
 import { useApp } from '../context/AppContext'
 import Icon from './Icon'
+import SafeImage from './SafeImage'
 import './Hero.css'
 
 export default function Hero() {
@@ -7,7 +8,13 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero">
-      <img className="hero__bg" src="/assets/hero-bg.png" alt="" aria-hidden="true" />
+      <SafeImage
+        className="hero__bg"
+        src={t.hero.backgroundUrl}
+        fallback="/assets/hero-bg.png"
+        alt=""
+        aria-hidden="true"
+      />
       <div className="hero__overlay" aria-hidden="true" />
 
       <div className="hero__content">
